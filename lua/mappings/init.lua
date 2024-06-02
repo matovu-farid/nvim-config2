@@ -20,3 +20,11 @@ map("n", "<leader>sne", function() require("scissors").editSnippet() end)
 map({ "n", "x" }, "<leader>sna", function() require("scissors").addNewSnippet() end)
 map("n", "]e", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 map("n", "[e", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+map('n', 'gl', ":vertical wincmd L<CR>", { silent = true, noremap = true, desc = "Put buffer on the right" })
+map('n', 'gh', ":vertical wincmd H<CR>", { silent = true, noremap = true, desc = "Put buffer on the left" })
+map('n', 'gj', ":wincmd J<CR>", { silent = true, noremap = true, desc = "Put buffer on the top" })
+map('n', 'gk', ":wincmd K<CR>", { silent = true, noremap = true, desc = "Put buffer on the bottom" })
+map('n', '<C-w>|', ":vertical split right<CR>", { silent = true, noremap = true, desc = "vertical split" })
+map('n', '<C-w>_', ":split<CR>", { silent = true, noremap = true, desc = "horzontal split" })
+
+

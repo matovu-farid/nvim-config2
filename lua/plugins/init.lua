@@ -127,4 +127,5 @@ return {
     },
     config = true,
   },
+  {'tpope/vim-abolish', lazy=false},
 }
