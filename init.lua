@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+require "autocmds.before"
 -- load plugins
 require("lazy").setup({
   {
@@ -33,6 +34,7 @@ dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
 require "nvchad.autocmds"
+require "autocmds.after"
 
 vim.schedule(function()
   require "mappings"

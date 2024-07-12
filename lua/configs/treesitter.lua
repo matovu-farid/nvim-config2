@@ -1,14 +1,18 @@
-require('nvim-treesitter.configs').setup {
-   auto_install = true,
-    textsubjects = {
-        enable = true,
-        prev_selection = ',', -- (Optional) keymap to select the previous selection
-        keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
-            ['i;'] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
-        },
+require("nvim-treesitter.configs").setup {
+  auto_install = true,
+  highlight = {
+    additional_vim_regex_highlighting = true,
+  },
+
+  textsubjects = {
+    enable = true,
+    prev_selection = ",", -- (Optional) keymap to select the previous selection
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+      ["i;"] = { "textsubjects-container-inner", desc = "Select inside containers (classes, functions, etc.)" },
     },
+  },
   textobjects = {
     select = {
       enable = true,
@@ -35,9 +39,9 @@ require('nvim-treesitter.configs').setup {
       -- and should return the mode ('v', 'V', or '<c-v>') or a table
       -- mapping query_strings to modes.
       selection_modes = {
-        ['@parameter.outer'] = 'v', -- charwise
-        ['@function.outer'] = 'V', -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
+        ["@parameter.outer"] = "v", -- charwise
+        ["@function.outer"] = "V", -- linewise
+        ["@class.outer"] = "<c-v>", -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is
       -- extended to include preceding or succeeding whitespace. Succeeding
@@ -52,4 +56,3 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
-

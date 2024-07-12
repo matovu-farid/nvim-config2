@@ -28,20 +28,37 @@ local function push()
   vim.cmd "Git push"
 end
 
-local function stash()
-  vim.cmd "Git stash"
+local function status()
+  vim.cmd "Git status"
+end
+
+local function diff()
+  vim.cmd "Git diff ."
 end
 
 local function create_repo()
   input({ prompt = "Repo name: " }, function(name)
     if name ~= "" then
-      vim.cmd ("!gh repo create ".. name .."--public --push --source .")
+      vim.cmd ("!gh repo create ".. name .." --public --push --source .")
     end
   end)
 end
 
-map("n", "<leader>gs", stash, { desc = "Git stash" })
-map("n", "<leader>gca", commitAll, { desc = "Git commit All" })
-map("n", "<leader>gcc", commitCurrent, { desc = "Git commit Current file" })
-map("n", "<leader>gp", push, { desc = "Git push" })
-map("n", "<leader>gcr", create_repo, { desc = "Create a new github repo" })
+
+
+
+local which_key = require("which-key")
+which_key.register({
+  ["<leader>g"] = {
+    name = "Git",
+    s = { status, "Git status" },
+    d = { diff, "Git diff" },
+    c = {
+      name = "Commit",
+      a = { commitAll, "Git commit all" },
+      c = { commitCurrent, "Git commit current file" },
+    },
+    p = { push, "Git push" },
+    r = { create_repo, "Create a new github repo" },
+  },
+})

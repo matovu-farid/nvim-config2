@@ -2,6 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
+    opts = {},
     config = function()
       require "configs.conform"
     end,
@@ -59,7 +60,11 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("oil").setup()
+      require("oil").setup {
+        view_options = {
+          -- show_hidden = true
+        },
+      }
     end,
     lazy = false,
   },
@@ -67,7 +72,7 @@ return {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
-    ft = { "typescript", "javascript" },
+    ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
     config = function()
       require "configs.tstools"
     end,
@@ -120,12 +125,132 @@ return {
   {
     "akinsho/flutter-tools.nvim",
     -- lazy = false,
-    ft={ "dart" },
+    ft = { "dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
     config = true,
   },
-  {'tpope/vim-abolish', lazy=false},
+  { "tpope/vim-abolish", lazy = false },
+  { "tpope/vim-surround", lazy = false },
+  {
+    "coffebar/neovim-project",
+    opts = {
+      projects = { -- define project roots
+        "~/projects/*",
+        "~/.config/*",
+      },
+    },
+    init = function()
+      -- enable saving the state of plugins in the session
+      vim.opt.sessionoptions:append "globals" -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
+    config = function()
+      require("neovim-project").setup {
+        dashboard_mode = true,
+      }
+    end,
+  },
+  {
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+    -- event= "BufEnter */**/package.json"
+  },
+  -- {
+  --   "folke/flash.nvim",
+  --   event = "VeryLazy",
+  --   ---@type Flash.Config
+  --   opts = {},
+  -- -- stylua: ignore
+  -- keys = {
+  --   { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  --   { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+  --   { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  --   { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+  --   { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  -- },
+  -- },
+  {
+    "xeluxee/competitest.nvim",
+    dependencies = "MunifTanjim/nui.nvim",
+    config = function()
+      require("competitest").setup()
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+  {
+    "https://git.sr.ht/~swaits/scratch.nvim",
+    lazy = true,
+    keys = {
+      { "<leader>bs", "<cmd>Scratch<cr>", desc = "Scratch Buffer", mode = "n" },
+      { "<leader>bS", "<cmd>ScratchSplit<cr>", desc = "Scratch Buffer (split)", mode = "n" },
+    },
+    cmd = {
+      "Scratch",
+      "ScratchSplit",
+    },
+    opts = {},
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    lazy = false,
+    config = function()
+      require "configs.terminal"
+    end,
+  },
+  { "tpope/vim-rails", lazy = false },
+  {
+    "windwp/nvim-ts-autotag",
+    lazy = false,
+    config = function()
+      require "configs.autotag"
+    end,
+  },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    lazy = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {}, -- your configuration
+    config = function()
+      require("tailwind-tools").setup {
+        -- your configuration
+      }
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree/nvim-tree.lua",
+    enabled = false,
+  },
+
+  {
+    "tpope/vim-dispatch",
+    lazy = false,
+  },
+  {
+    "tpope/vim-dadbod",
+    lazy = false,
+  },
+    {
+"tpope/vim-unimpaired",
+    lazy = false,
+  },
+
 }
