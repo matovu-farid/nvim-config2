@@ -7,6 +7,21 @@ return {
       require "configs.conform"
     end,
   },
+  {
+  "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = "bash /usr/local/bin/get_openai_key",
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+},
 
   -- These are some examples, uncomment them if you want to see them work!
   {
@@ -248,9 +263,42 @@ return {
     "tpope/vim-dadbod",
     lazy = false,
   },
-    {
-"tpope/vim-unimpaired",
+  {
+    "tpope/vim-unimpaired",
     lazy = false,
   },
-
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
+  {
+    "arminveres/md-pdf.nvim",
+    branch = "main", -- you can assume that main is somewhat stable until releases will be made
+    lazy = true,
+    keys = {
+      {
+        "<leader>,",
+        function()
+          require("md-pdf").convert_md_to_pdf()
+        end,
+        desc = "Markdown preview",
+      },
+    },
+    opts = {},
+  },
 }
